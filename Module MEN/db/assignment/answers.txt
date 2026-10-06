@@ -1,0 +1,206 @@
+Part 1: Library_DB
+Q1. Set up a MongoDB database named "Library_DB".
+js
+use Library_DB
+switched to db Library_DB
+
+Q2. Create a collection named "books" within the "Library_DB" database.
+The collection is created automatically when the first document is inserted (see Q3).
+
+Q3. Insert at least 5 documents into the "books" collection.
+js
+db.books.insertMany([
+  { title: "Atomic Habits",      author: "James Clear",      genre: "Self-Help", price: 550, availableCopies: 10 },
+  { title: "The Alchemist",      author: "Paulo Coelho",     genre: "Fiction",   price: 350, availableCopies: 15 },
+  { title: "Wings of Fire",      author: "A.P.J. Abdul Kalam", genre: "Biography", price: 299, availableCopies: 0 },
+  { title: "The White Tiger",    author: "Aravind Adiga",    genre: "Fiction",   price: 450, availableCopies: 8 },
+  { title: "Rich Dad Poor Dad",  author: "Robert Kiyosaki",  genre: "Finance",   price: 899, availableCopies: 5 }
+])
+{ acknowledged: true, insertedIds: { '0': ObjectId('...'), '1': ObjectId('...'), '2': ObjectId('...'), '3': ObjectId('...'), '4': ObjectId('...') } }
+
+Q4. Ensure that each document has a unique identifier.
+MongoDB adds a unique _id (ObjectId) to every document automatically, as seen in the output of Q3.
+
+Q5. Retrieve and display all documents from the "books" collection.
+js
+db.books.find()
+{ _id: ObjectId('...'), title: 'Atomic Habits',     author: 'James Clear',        genre: 'Self-Help', price: 550, availableCopies: 10 }
+{ _id: ObjectId('...'), title: 'The Alchemist',     author: 'Paulo Coelho',       genre: 'Fiction',   price: 350, availableCopies: 15 }
+{ _id: ObjectId('...'), title: 'Wings of Fire',     author: 'A.P.J. Abdul Kalam', genre: 'Biography', price: 299, availableCopies: 0 }
+{ _id: ObjectId('...'), title: 'The White Tiger',   author: 'Aravind Adiga',      genre: 'Fiction',   price: 450, availableCopies: 8 }
+{ _id: ObjectId('...'), title: 'Rich Dad Poor Dad', author: 'Robert Kiyosaki',    genre: 'Finance',   price: 899, availableCopies: 5 }
+
+Q6. Find and display books whose price is between ₹300 and ₹800.
+js
+db.books.find({ price: { $gte: 300, $lte: 800 } })
+{ title: 'Atomic Habits',   price: 550, ... }
+{ title: 'The Alchemist',   price: 350, ... }
+{ title: 'The White Tiger', price: 450, ... }
+
+Q7. Find and display books belonging to a specific genre.
+js
+db.books.find({ genre: "Fiction" })
+{ title: 'The Alchemist',   genre: 'Fiction', price: 350, availableCopies: 15, ... }
+{ title: 'The White Tiger', genre: 'Fiction', price: 450, availableCopies: 8, ... }
+
+Q8. Update the price of a particular book.
+js
+db.books.updateOne({ title: "The Alchemist" }, { $set: { price: 400 } })
+{ acknowledged: true, matchedCount: 1, modifiedCount: 1, upsertedCount: 0 }
+
+Q9. Increment the availableCopies of books that are currently in stock by 2.
+js
+db.books.updateMany({ availableCopies: { $gt: 0 } }, { $inc: { availableCopies: 2 } })
+{ acknowledged: true, matchedCount: 4, modifiedCount: 4, upsertedCount: 0 }
+
+Q10. Delete a book document from the collection.
+js
+db.books.deleteOne({ title: "Rich Dad Poor Dad" })
+{ acknowledged: true, deletedCount: 1 }
+
+Q11. Delete all books that have 0 availableCopies.
+js
+db.books.deleteMany({ availableCopies: 0 })
+{ acknowledged: true, deletedCount: 1 }
+
+
+Part 2: Hospital_DB
+
+Q12. Set up a MongoDB database named "Hospital_DB".
+js
+use Hospital_DB
+switched to db Hospital_DB
+
+Q13. Create a collection named "patients" within the "Hospital_DB" database.
+The collection is created automatically when the first document is inserted (see Q14).
+
+Q14. Insert at least 5 documents into the "patients" collection.
+js
+db.patients.insertMany([
+  { name: "Amit Sharma",  age: 35, disease: "Diabetes",     doctorAssigned: "Dr. Mehta",  city: "Mumbai" },
+  { name: "Priya Nair",   age: 28, disease: "Asthma",       doctorAssigned: "Dr. Rao",    city: "Pune" },
+  { name: "Ramesh Patil", age: 65, disease: "Hypertension", doctorAssigned: "Dr. Joshi",  city: "Mumbai" },
+  { name: "Sunita Verma", age: 62, disease: "Diabetes",     doctorAssigned: "Dr. Mehta",  city: "Delhi" },
+  { name: "Rohan Gupta",  age: 45, disease: "Fever",        doctorAssigned: "Dr. Rao",    city: "Pune" },
+  { name: "Meera Iyer",   age: 52, disease: "Migraine",     doctorAssigned: "Dr. Joshi",  city: "Chennai" }
+])
+{ acknowledged: true, insertedIds: { '0': ObjectId('...'), ... '5': ObjectId('...') } }
+
+Q15. Ensure that each patient has a unique identifier.
+MongoDB adds a unique _id to every document automatically, as seen in the output of Q14.
+
+Q16. Retrieve and display all documents from the "patients" collection.
+js
+db.patients.find()
+{ _id: ObjectId('...'), name: 'Amit Sharma',  age: 35, disease: 'Diabetes',     doctorAssigned: 'Dr. Mehta', city: 'Mumbai' }
+{ _id: ObjectId('...'), name: 'Priya Nair',   age: 28, disease: 'Asthma',       doctorAssigned: 'Dr. Rao',   city: 'Pune' }
+{ _id: ObjectId('...'), name: 'Ramesh Patil', age: 65, disease: 'Hypertension', doctorAssigned: 'Dr. Joshi', city: 'Mumbai' }
+{ _id: ObjectId('...'), name: 'Sunita Verma', age: 62, disease: 'Diabetes',     doctorAssigned: 'Dr. Mehta', city: 'Delhi' }
+{ _id: ObjectId('...'), name: 'Rohan Gupta',  age: 45, disease: 'Fever',        doctorAssigned: 'Dr. Rao',   city: 'Pune' }
+{ _id: ObjectId('...'), name: 'Meera Iyer',   age: 52, disease: 'Migraine',     doctorAssigned: 'Dr. Joshi', city: 'Chennai' }
+
+Q17. Find and display patients whose age is between 20 and 50 years old.
+js
+db.patients.find({ age: { $gte: 20, $lte: 50 } })
+{ name: 'Amit Sharma', age: 35, ... }
+{ name: 'Priya Nair',  age: 28, ... }
+{ name: 'Rohan Gupta', age: 45, ... }
+
+Q18. Find and display patients suffering from a specific disease.
+js
+db.patients.find({ disease: "Diabetes" })
+{ name: 'Amit Sharma', disease: 'Diabetes', ... }
+{ name: 'Sunita Verma', disease: 'Diabetes', ... }
+
+Q19. Update the doctorAssigned field of a patient.
+js
+db.patients.updateOne({ name: "Amit Sharma" }, { $set: { doctorAssigned: "Dr. Kapoor" } })
+{ acknowledged: true, matchedCount: 1, modifiedCount: 1, upsertedCount: 0 }
+
+Q20. Increment the age of patients above 60 years by 1 year.
+js
+db.patients.updateMany({ age: { $gt: 60 } }, { $inc: { age: 1 } })
+{ acknowledged: true, matchedCount: 2, modifiedCount: 2, upsertedCount: 0 }
+
+Q21. Delete a patient document from the collection.
+js
+db.patients.deleteOne({ name: "Rohan Gupta" })
+{ acknowledged: true, deletedCount: 1 }
+
+Q22. Delete all patients belonging to a specific city.
+js
+db.patients.deleteMany({ city: "Delhi" })
+{ acknowledged: true, deletedCount: 1 }
+
+
+Part 3: Extra queries
+
+Q23 to Q29 and Q31 to Q32 use the patients collection (in Hospital_DB), which now has 4 patients: Amit (35), Priya (28), Ramesh (66) and Meera (52). Q30 uses the books collection (in Library_DB), because only books have a price.
+
+Q23. Fetch only one document from the collection using findOne().
+js
+db.patients.findOne()
+{ _id: ObjectId('...'), name: 'Amit Sharma', age: 35, disease: 'Diabetes', doctorAssigned: 'Dr. Kapoor', city: 'Mumbai' }
+
+Q24. Display only selected fields (e.g., show only name and disease).
+js
+db.patients.find({}, { name: 1, disease: 1, _id: 0 })
+{ name: 'Amit Sharma',  disease: 'Diabetes' }
+{ name: 'Priya Nair',   disease: 'Asthma' }
+{ name: 'Ramesh Patil', disease: 'Hypertension' }
+{ name: 'Meera Iyer',   disease: 'Migraine' }
+
+Q25. Retrieve documents sorted in ascending order.
+js
+db.patients.find().sort({ age: 1 })
+{ name: 'Priya Nair',   age: 28, ... }
+{ name: 'Amit Sharma',  age: 35, ... }
+{ name: 'Meera Iyer',   age: 52, ... }
+{ name: 'Ramesh Patil', age: 66, ... }
+
+Q26. Retrieve documents sorted in descending order.
+js
+db.patients.find().sort({ age: -1 })
+{ name: 'Ramesh Patil', age: 66, ... }
+{ name: 'Meera Iyer',   age: 52, ... }
+{ name: 'Amit Sharma',  age: 35, ... }
+{ name: 'Priya Nair',   age: 28, ... }
+
+Q27. Limit the output to the first 3 records.
+js
+db.patients.find().limit(3)
+{ name: 'Amit Sharma', ... }
+{ name: 'Priya Nair', ... }
+{ name: 'Ramesh Patil', ... }
+
+Q28. Skip the first 2 records and display remaining records.
+js
+db.patients.find().skip(2)
+{ name: 'Ramesh Patil', ... }
+{ name: 'Meera Iyer', ... }
+
+Q29. Find records where age is greater than 40.
+js
+db.patients.find({ age: { $gt: 40 } })
+{ name: 'Ramesh Patil', age: 66, ... }
+{ name: 'Meera Iyer',   age: 52, ... }
+
+Q30. Find records where price is less than ₹500.
+js
+use Library_DB
+db.books.find({ price: { $lt: 500 } })
+{ title: 'The Alchemist',   price: 400, ... }
+{ title: 'The White Tiger', price: 450, ... }
+
+Q31. Find documents using multiple conditions with $and.
+js
+use Hospital_DB
+db.patients.find({ $and: [ { age: { $gt: 30 } }, { city: "Mumbai" } ] })
+{ name: 'Amit Sharma',  age: 35, city: 'Mumbai', ... }
+{ name: 'Ramesh Patil', age: 66, city: 'Mumbai', ... }
+
+Q32. Find documents using $or condition.
+js
+db.patients.find({ $or: [ { disease: "Diabetes" }, { disease: "Asthma" } ] })
+{ name: 'Amit Sharma', disease: 'Diabetes', ... }
+{ name: 'Priya Nair',  disease: 'Asthma', ... }

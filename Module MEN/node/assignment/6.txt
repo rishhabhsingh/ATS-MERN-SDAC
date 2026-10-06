@@ -1,0 +1,13 @@
+What is Nodemon?
+Nodemon is a development tool for Node.js that automatically restarts your application when file changes are detected.
+
+How to Install Nodemon?
+npm install -g nodemon
+
+Example Program:
+console.log("Hello, Nodemon is running!");
+
+How to Run Example Program:
+nodemon app.js
+
+

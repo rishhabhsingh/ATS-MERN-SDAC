@@ -1,0 +1,125 @@
+Part 1: CRUD_DB
+Q1. Set up a MongoDB database named "CRUD_DB".
+js
+use CRUD_DB
+switched to db CRUD_DB
+
+Q2. Create a collection named "users" within the "CRUD_DB" database.
+The collection is created automatically when the first document is inserted (see Q3).
+
+Q3. Insert at least 5 documents into the "users" collection.
+js
+db.users.insertMany([
+  { name: "Ravi Kishan",   age: 50, email: "jaldithelate@gmail.com",    country: "India" },
+  { name: "Ravi",          age: 45, email: "jaldithelate@gmail.com",    country: "India" },
+  { name: "Kishan",        age: 27, email: "jaldithelate@gmail.com",    country: "India" },
+  { name: "Gyanesh Kumar", age: 45, email: "itsdonegyanu@gmail.com",    country: "India" },
+  { name: "Kumar Gyanesh", age: 54, email: "gyanuitsdonebro@gmail.com", country: "India" }
+])
+{ acknowledged: true, insertedIds: { '0': ObjectId('6abdd45991094134848e33ed'), ... '4': ObjectId('6abdd45991094134848e33f1') } }
+
+Q4. Ensure that each document has a unique identifier.
+MongoDB adds a unique _id (ObjectId) to every document automatically, as seen in the output of Q3.
+
+Q5. Retrieve and display all documents from the "users" collection.
+js
+db.users.find()
+{ _id: ObjectId('6abdd45991094134848e33ed'), name: 'Ravi Kishan',   age: 50, email: 'jaldithelate@gmail.com',    country: 'India' }
+{ _id: ObjectId('6abdd45991094134848e33ee'), name: 'Ravi',          age: 45, email: 'jaldithelate@gmail.com',    country: 'India' }
+{ _id: ObjectId('6abdd45991094134848e33ef'), name: 'Kishan',        age: 27, email: 'jaldithelate@gmail.com',    country: 'India' }
+{ _id: ObjectId('6abdd45991094134848e33f0'), name: 'Gyanesh Kumar', age: 45, email: 'itsdonegyanu@gmail.com',    country: 'India' }
+{ _id: ObjectId('6abdd45991094134848e33f1'), name: 'Kumar Gyanesh', age: 54, email: 'gyanuitsdonebro@gmail.com', country: 'India' }
+
+Q6. Find and display users who are between 25 and 35 years old.
+js
+db.users.find({ age: { $gte: 25, $lte: 35 } })
+{ _id: ObjectId('6abdd45991094134848e33ef'), name: 'Kishan', age: 27, email: 'jaldithelate@gmail.com', country: 'India' }
+
+Q7. Find and display users who are from a specific country.
+js
+db.users.find({ country: "India" })
+(all 5 users are returned)
+
+Q8. Update the email address of a user.
+js
+db.users.updateOne({ age: 27 }, { $set: { email: "moneyfollowsbrotha@gmail.com" } })
+{ acknowledged: true, matchedCount: 1, modifiedCount: 1, upsertedCount: 0 }
+
+Q9. Increment the age of users who are above 30 by 1 year.
+js
+db.users.updateMany({ age: { $gte: 30 } }, { $inc: { age: 1 } })
+{ acknowledged: true, matchedCount: 4, modifiedCount: 4, upsertedCount: 0 }
+
+Q10. Delete a user document from the collection.
+js
+db.users.deleteOne({ age: 27 })
+{ acknowledged: true, deletedCount: 1 }
+
+Q11. Delete all users who are below 25 years old.
+js
+db.users.deleteMany({ age: { $lt: 25 } })
+{ acknowledged: true, deletedCount: 0 }
+
+
+Part 2: Product_DB
+Q12. Set up a MongoDB database named "Product_DB".
+js
+use Product_DB
+switched to db Product_DB
+
+Q13. Create a collection named "products" within the "Product_DB" database.
+The collection is created automatically when the first document is inserted (see Q14).
+
+Q14. Insert at least 5 documents into the "products" collection.
+js
+db.products.insertMany([
+  { name: "bandana",      category: "hair", price: 250,    quantity: 20  },
+  { name: "kohlikejoote", category: "feet", price: 25000,  quantity: 18  },
+  { name: "labubudoll",   category: "tp",   price: 2500,   quantity: 200 },
+  { name: "laptop",       category: "game", price: 250000, quantity: 2   },
+  { name: "nimbumirchi",  category: "ghar", price: 25,     quantity: 25  }
+])
+{ acknowledged: true, insertedIds: { '0': ObjectId('6abdda8191094134848e33f2'), ... '4': ObjectId('6abdda8191094134848e33f6') } }
+
+Q15. Ensure that each product has a unique identifier.
+MongoDB adds a unique _id to every document automatically, as seen in the output of Q14.
+
+Q16. Retrieve and display all documents from the "products" collection.
+js
+db.products.find()
+{ _id: ObjectId('6abdda8191094134848e33f2'), name: 'bandana',      category: 'hair', price: 250,    quantity: 20  }
+{ _id: ObjectId('6abdda8191094134848e33f3'), name: 'kohlikejoote', category: 'feet', price: 25000,  quantity: 18  }
+{ _id: ObjectId('6abdda8191094134848e33f4'), name: 'labubudoll',   category: 'tp',   price: 2500,   quantity: 200 }
+{ _id: ObjectId('6abdda8191094134848e33f5'), name: 'laptop',       category: 'game', price: 250000, quantity: 2   }
+{ _id: ObjectId('6abdda8191094134848e33f6'), name: 'nimbumirchi',  category: 'ghar', price: 25,     quantity: 25  }
+
+Q17. Find and display products within a specific price range.
+js
+db.products.find({ price: { $gte: 250, $lte: 2500 } })
+{ name: 'bandana',    category: 'hair', price: 250,  quantity: 20  }
+{ name: 'labubudoll', category: 'tp',   price: 2500, quantity: 200 }
+
+Q18. Find and display products in a particular category.
+js
+db.products.find({ category: "game" })
+{ name: 'laptop', category: 'game', price: 250000, quantity: 2 }
+
+Q19. Update the price of a product.
+js
+db.products.updateOne({ name: "labubudoll" }, { $set: { price: 3500 } })
+{ acknowledged: true, matchedCount: 1, modifiedCount: 1, upsertedCount: 0 }
+
+Q20. Decrement the quantity of products that are currently in stock.
+js
+db.products.updateMany({ quantity: { $gte: 150 } }, { $inc: { quantity: -1 } })
+{ acknowledged: true, matchedCount: 1, modifiedCount: 1, upsertedCount: 0 }
+
+Q21. Delete a product document from the collection.
+js
+db.products.deleteOne({ name: "laptop" })
+{ acknowledged: true, deletedCount: 1 }
+
+Q22. Delete all products that are out of stock.
+js
+db.products.deleteMany({ quantity: { $lte: 0 } })
+{ acknowledged: true, deletedCount: 0 }
