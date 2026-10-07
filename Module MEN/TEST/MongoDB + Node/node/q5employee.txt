@@ -1,0 +1,4 @@
+name:Rishabh
+email:singhrishabh@gmail.com
+salary:90000
+department:I1

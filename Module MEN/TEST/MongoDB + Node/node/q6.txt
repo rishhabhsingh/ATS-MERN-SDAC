@@ -1,0 +1,1 @@
+the changes that occur in the node folder is that npm got intiated and package named mongoose and tool named nodemon installed which can be checked through the package.json file. 

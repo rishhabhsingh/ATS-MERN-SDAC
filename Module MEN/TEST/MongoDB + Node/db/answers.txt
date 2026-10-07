@@ -1,0 +1,145 @@
+PART 2
+8.
+use Restaurant_DB
+
+9.
+db.createCollection("menu")
+
+10.
+db.menu.insertMany([
+    {
+        dishName: "pav bhaji",
+        category: "veg",
+        price: 150,
+        availableQuantity: 5
+    },
+    {
+        dishName: "butter chicken",
+        category: "non-veg",
+        price: 250,
+        availableQuantity: 6
+    },
+    {
+        dishName: "soya chaap",
+        category: "veg",
+        price: 250,
+        availableQuantity: 15
+    },
+    {
+        dishName: "Chole Kuclche",
+        category: "veg",
+        price: 20,
+        availableQuantity: 50
+    },
+    {
+        dishName: "Biryani",
+        category: "non-veg",
+        price: 150,
+        availableQuantity: 5
+    }
+])
+
+11.
+db.menu.find()
+
+12.
+db.menu.find({price: {$gte: 200, $lte: 600}})
+
+13.
+db.menu.find({category: "veg"})
+
+14.
+db.menu.updateOne({dishName: "Chole Kuclche"}, {$set: {price: 200}})
+
+15.
+db.menu.updateOne({dishName: "Chole Kuclche"}, {$inc: {availableQuantity: 2}})
+
+16.
+db.menu.deleteOne({dishName: "Chole Kuclche"})
+
+17.
+db.menu.deleteMany({availableQuantity: 0})
+
+
+
+PART 3
+18.
+use "Gym_DB"
+db.createCollection("members")
+
+19.
+db.members.insertMany([
+    {
+        name: "Awdoot Mule",
+        age: 19,
+        membershipPlan: "Basic",
+        trainerAssigned: "Yes",
+        city: "Pune"
+    },
+    {
+        name: "Sakhet Gokhale",
+        age: 23,
+        membershipPlan: "Premium",
+        trainerAssigned: "No",
+        city: "Pune"
+    },
+    {
+        name: "Deon Deuk",
+        age: 24,
+        membershipPlan: "Premium",
+        trainerAssigned: "No",
+        city: "Pune"
+    },
+    {
+        name: "Rajveer Tomar",
+        age: 32,
+        membershipPlan: "Premium",
+        trainerAssigned: "Yes",
+        city: "Goa"
+    },
+    {
+        name: "Narayan Jha",
+        age: 21,
+        membershipPlan: "Basic",
+        trainerAssigned: "No",
+        city: "Mumbai"
+    }
+])
+
+20.
+db.members.find()
+
+21.
+db.members.find({age: {$gte: 20, $lte: 40}})
+
+22.
+db.members.find({membershipPlan: "Premium"})
+
+23.
+db.members.updateOne({name: "Rajveer Tomar"}, {$set: {trainerAssigned: "No"}})
+
+24.
+db.members.updateOne({name: "Narayan Jha"}, {$inc: {age: 1}})
+
+25.
+db.members.deleteOne({city: "Mumbai"})
+
+
+
+PART4
+26.
+db.members.findOne({name: "Sakhet Gokhale"})
+
+27.
+db.members.findOne({age: {$gte: 20}})
+
+28.
+
+29.
+db.members.findOne({age: {$lte: 25}})
+
+30.
+
+
+
+
