@@ -1,0 +1,11 @@
+<%- include('../partials/plain-header') %>
+<h2>Contact Us</h2>
+<% if (success) { %><p><b><%= success %></b></p><% } %>
+<% if (errors.length) { %><ul><% errors.forEach(e => { %><li><%= e %></li><% }) %></ul><% } %>
+<form method="POST" action="/plain/contact">
+  <p>Name: <input type="text" name="name" value="<%= form.name || '' %>"></p>
+  <p>Email: <input type="text" name="email" value="<%= form.email || '' %>"></p>
+  <p>Message:<br><textarea name="message" rows="5" cols="40"><%= form.message || '' %></textarea></p>
+  <button type="submit">Send</button>
+</form>
+<%- include('../partials/plain-footer') %>

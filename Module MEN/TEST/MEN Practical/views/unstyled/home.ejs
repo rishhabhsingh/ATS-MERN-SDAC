@@ -1,0 +1,18 @@
+<%- include('../partials/plain-header') %>
+<h2>Welcome to the Library</h2>
+<p>Browse our available books below.</p>
+<h3>Available Books</h3>
+<% if (books.length === 0) { %>
+  <p>No books available.</p>
+<% } else { %>
+  <table border="1">
+    <tr><th>Title</th><th>Author</th><th>ISBN</th><th>Category</th><th>Price</th></tr>
+    <% books.forEach(b => { %>
+      <tr>
+        <td><%= b.title %></td><td><%= b.author %></td><td><%= b.isbn %></td>
+        <td><%= b.category %></td><td><%= b.price %></td>
+      </tr>
+    <% }) %>
+  </table>
+<% } %>
+<%- include('../partials/plain-footer') %>

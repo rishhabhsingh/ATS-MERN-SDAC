@@ -1,0 +1,26 @@
+<%- include('../partials/styled-header') %>
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="mb-3">Contact Us</h2>
+        <% if (success) { %><div class="alert alert-success"><%= success %></div><% } %>
+        <% if (errors.length) { %>
+          <div class="alert alert-danger"><ul class="mb-0">
+            <% errors.forEach(e => { %><li><%= e %></li><% }) %>
+          </ul></div>
+        <% } %>
+        <form method="POST" action="/contact">
+          <div class="mb-3"><label class="form-label">Name</label>
+            <input class="form-control" name="name" value="<%= form.name || '' %>"></div>
+          <div class="mb-3"><label class="form-label">Email</label>
+            <input class="form-control" name="email" value="<%= form.email || '' %>"></div>
+          <div class="mb-3"><label class="form-label">Message</label>
+            <textarea class="form-control" name="message" rows="5"><%= form.message || '' %></textarea></div>
+          <button class="btn btn-primary w-100">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<%- include('../partials/styled-footer') %>

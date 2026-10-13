@@ -1,0 +1,25 @@
+<%- include('../partials/styled-header') %>
+<div class="p-5 mb-4 bg-white rounded shadow-sm text-center">
+  <h1 class="display-5">Library Management System</h1>
+  <p class="lead">Welcome! Browse our collection of books below.</p>
+</div>
+<h3 class="mb-3">Available Books</h3>
+<% if (books.length === 0) { %>
+  <div class="alert alert-info">No books available yet.</div>
+<% } else { %>
+  <div class="table-responsive">
+    <table class="table table-striped table-hover book-table shadow-sm">
+      <thead><tr><th>Title</th><th>Author</th><th>ISBN</th><th>Category</th><th>Price (₹)</th></tr></thead>
+      <tbody>
+        <% books.forEach(b => { %>
+          <tr>
+            <td><%= b.title %></td><td><%= b.author %></td><td><%= b.isbn %></td>
+            <td><span class="badge bg-secondary"><%= b.category %></span></td>
+            <td><%= b.price %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+<%- include('../partials/styled-footer') %>
