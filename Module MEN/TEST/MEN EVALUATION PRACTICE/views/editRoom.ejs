@@ -1,0 +1,30 @@
+<%- include("partials/header") %>
+
+<h3>Edit Room</h3>
+
+<form method="POST" action="/rooms/edit/<%= room._id %>">
+  <div class="mb-3">
+    <label class="form-label">Room Number</label>
+    <input type="text" name="roomNumber" class="form-control" value="<%= room.roomNumber %>" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Room Type</label>
+    <select name="roomType" class="form-select" required>
+      <% ["Single", "Double", "Deluxe", "Suite"].forEach(function(t) { %>
+        <option <%= room.roomType === t ? "selected" : "" %>><%= t %></option>
+      <% }); %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Price Per Night</label>
+    <input type="number" name="pricePerNight" class="form-control" value="<%= room.pricePerNight %>" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Capacity</label>
+    <input type="number" name="capacity" class="form-control" value="<%= room.capacity %>" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Update</button>
+  <a href="/rooms" class="btn btn-secondary">Cancel</a>
+</form>
+
+<%- include("partials/footer") %>

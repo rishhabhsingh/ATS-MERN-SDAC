@@ -1,0 +1,43 @@
+<%- include("partials/header") %>
+
+<div class="d-flex justify-content-between mb-3">
+  <h3>Room List</h3>
+  <a href="/rooms/add" class="btn btn-success">Add Room</a>
+</div>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Room Number</th>
+      <th>Room Type</th>
+      <th>Price Per Night</th>
+      <th>Capacity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let i = 0; i < rooms.length; i++) { %>
+      <tr>
+        <td><%= i + 1 %></td>
+        <td><%= rooms[i].roomNumber %></td>
+        <td><%= rooms[i].roomType %></td>
+        <td>₹<%= rooms[i].pricePerNight %></td>
+        <td><%= rooms[i].capacity %></td>
+        <td>
+          <a href="/rooms/edit/<%= rooms[i]._id %>" class="btn btn-warning btn-sm">Edit</a>
+          <form method="POST" action="/rooms/delete/<%= rooms[i]._id %>" class="d-inline"
+                onsubmit="return confirm('Delete this room?')">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
+<% if (rooms.length === 0) { %>
+  <p>No rooms found.</p>
+<% } %>
+
+<%- include("partials/footer") %>
