@@ -1,0 +1,24 @@
+<%- include("partials/header") %>
+
+<div class="row justify-content-center my-4">
+  <div class="col-md-6 col-lg-5">
+    <div class="form-card">
+      <h2 class="mb-1">Welcome back</h2>
+      <p class="text-muted mb-4">Login to write and manage your posts.</p>
+
+      <form method="POST" action="/login">
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input type="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-ink w-100">Login</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

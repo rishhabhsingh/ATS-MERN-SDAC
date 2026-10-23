@@ -1,0 +1,10 @@
+<%- include("partials/header") %>
+
+<div class="post-wrap">
+  <div class="form-card">
+    <h2 class="mb-4">Write a new post</h2>
+    <%- include("partials/postForm", { error: error, post: post, action: "/posts/add", button: "Publish post" }) %>
+  </div>
+</div>
+
+<%- include("partials/footer") %>

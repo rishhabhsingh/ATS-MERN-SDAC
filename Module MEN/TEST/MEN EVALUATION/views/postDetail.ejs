@@ -1,0 +1,25 @@
+<%- include("partials/header") %>
+
+<article class="post-wrap my-3">
+  <a href="/posts" class="text-decoration-none">Back to all posts</a>
+
+  <div class="mt-4 mb-2"><span class="tag"><%= post.category %></span></div>
+  <h1><%= post.title %></h1>
+  <p class="meta mb-4">
+    By <%= post.authorName %> on
+    <%= new Date(post.createdAt).toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric" }) %>
+  </p>
+
+  <div class="post-body"><%= post.content %></div>
+
+  <% if (isOwner) { %>
+    <hr class="my-4">
+    <a href="/posts/edit/<%= post._id %>" class="btn btn-outline-secondary btn-sm">Edit post</a>
+    <form method="POST" action="/posts/delete/<%= post._id %>" class="d-inline"
+          onsubmit="return confirm('Delete this post?')">
+      <button type="submit" class="btn btn-outline-danger btn-sm">Delete post</button>
+    </form>
+  <% } %>
+</article>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,33 @@
+[
+{
+  "_id": {
+    "$oid": "6adad374c45f03662e4d92fc"
+  },
+  "fullName": "Rishabh Singh",
+  "email": "singhrishabh2308@gmail.com",
+  "password": "$2b$10$3UtdJCI4ffU5ZvzbKZE1gODEr.BCM1.Mq4T4wlxMUNi3ue8pyzmN2",
+  "createdAt": {
+    "$date": "2026-10-23T03:24:36.040Z"
+  },
+  "updatedAt": {
+    "$date": "2026-10-23T03:24:36.040Z"
+  },
+  "__v": 0
+},
+
+{
+  "_id": {
+    "$oid": "6adad9c8ae27a1f54f51c94e"
+  },
+  "fullName": "Aditya Soreng",
+  "email": "sorengadi@gmail.com",
+  "password": "$2b$10$6FiRkkAwKf4f3qncxKREweTI1iMaasXh7ONWu1IBrWNKuTKktKZoC",
+  "createdAt": {
+    "$date": "2026-10-23T03:51:36.701Z"
+  },
+  "updatedAt": {
+    "$date": "2026-10-23T03:51:36.701Z"
+  },
+  "__v": 0
+}
+]

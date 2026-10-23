@@ -1,0 +1,25 @@
+<% if (error) { %>
+  <div class="alert alert-danger"><%= error %></div>
+<% } %>
+
+<form method="POST" action="<%= action %>">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+    <input type="text" name="title" class="form-control form-control-lg" value="<%= post.title || '' %>" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+    <select name="category" class="form-select" required>
+      <option value="">Choose a category</option>
+      <% ["Technology", "Travel", "Food", "Lifestyle", "Education", "Other"].forEach(function(c) { %>
+        <option <%= post.category === c ? "selected" : "" %>><%= c %></option>
+      <% }); %>
+    </select>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Content</label>
+    <textarea name="content" rows="10" class="form-control" required><%= post.content || '' %></textarea>
+  </div>
+  <button type="submit" class="btn btn-ink"><%= button %></button>
+  <a href="/posts/my" class="btn btn-outline-secondary">Cancel</a>
+</form>
